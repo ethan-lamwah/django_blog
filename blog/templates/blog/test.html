@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <div id="app">
+        <h1 v-on:click="vote()">[[ message ]]</h1>
+    </div>
+
+    {{ username|json_script:"username" }}
+
+    <script type="text/javascript">
+        var username = JSON.parse(document.getElementById('username').textContent);
+        var app = new Vue({
+            el: "#app",
+            delimiters: ['[[', ']]'],
+            data: {
+            message: 'Hello ' + username + '!',
+            },
+            methods:{
+                vote: function(){
+                    alert('invoked')
+                }
+            }
+        });
+    </script>
+{% endblock content %}
